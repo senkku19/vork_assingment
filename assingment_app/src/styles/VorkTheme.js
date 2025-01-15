@@ -5,6 +5,7 @@ const VorkTheme = createTheme({
     palette: {
         primary: {
             main: '#01385E',
+            dark: '#012A49',
             light:'#014F85',
         },
         secondary: {
@@ -19,11 +20,23 @@ const VorkTheme = createTheme({
                     props: { className: 'navigation' },
                     style: {
                         display: 'flex',
-                        borderRadius: 0,
                         alignItems: 'center',
                         justifyContent: 'space-around',
                         padding: '16px 10px',
                         backgroundColor: 'white',
+                        }
+                },
+                {
+                    props: { className: 'nestedNavigation' },
+                    style: {
+                        display: 'flex',
+                        borderRadius: '50px',
+                        width: 'unset',
+                        padding: 0,
+                        margin: '20px',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        backgroundColor: BaseWorkStyles.colors.primary.dark,
                         }
                 },
                 {
