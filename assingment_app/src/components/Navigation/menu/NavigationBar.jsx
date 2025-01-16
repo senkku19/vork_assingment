@@ -5,7 +5,7 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 const NavigationBar = () => {
     return(
         <Container component={'nav'} className="navigation">
-            <NavigationItem to={"/"} icon={<AccessTimeRoundedIcon/>} label="Kellokortti"/>
+            <NavigationItem to={"/kellokortti"} icon={<AccessTimeRoundedIcon/>} label="Kellokortti"/>
         </Container>
     )
 }

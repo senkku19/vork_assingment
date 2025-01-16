@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+//import { Routes, Route, Navigate } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import Router from "./router";
 import Kellokortti from "./pages/Kellokortti";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import VorkTheme from "./styles/VorkTheme";
@@ -8,14 +10,7 @@ export default function App() {
     return (
         <ThemeProvider theme={VorkTheme}>
             <CssBaseline/>
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Kellokortti/>}>
-                            <Route index element={<WorkTime/>}/>
-                            <Route path="tyoaika" element={<WorkTime/>}/>
-                        </Route>
-                    </Routes>  
-                </Router>
+            <RouterProvider router={Router}/>
         </ThemeProvider>
        
     );

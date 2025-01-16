@@ -31,7 +31,7 @@ const NestedNavigationItem = ({ to, label }) => {
                 ...(isActive ? NavigationItemActiveStyle : {})
             })}
             >
-                <Typography>{label}</Typography> 
+                <Typography variant="h4" >{label}</Typography> 
             </NavLink>
         
     )
