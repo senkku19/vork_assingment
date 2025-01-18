@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import BaseWorkStyles from "../../styles/BaseWorkStyles";
 
-const Time = () => {
-    const [loggedTime, setLoggedTime] = useState();
-
-    const getCurrentTime = () => {
-        const time = new Date();
-        setLoggedTime(time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0'));
-    }
-
-    useEffect(() => {
-        getCurrentTime();
-    }, [])
+const Time = ({ loggedTime }) => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
