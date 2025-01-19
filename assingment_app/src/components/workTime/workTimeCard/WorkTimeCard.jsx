@@ -7,9 +7,14 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import BaseWorkStyles from '../../../styles/BaseWorkStyles';
 import Timer from './Timer';
-import useTimeCardStore from '../../../store/timeCard';
+import useTimerStore from '../../../store/timer';
 
 const WorkTimeCard = () => {
+    const isRunning = useTimerStore(state => state.isRunning);
+    const pauseTimer = useTimerStore(state => state.pauseTimer);
+    const startTimer = useTimerStore(state => state.startTimer);
+
+
     return (
         <Card className = 'timeCardBase'>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
@@ -23,17 +28,29 @@ const WorkTimeCard = () => {
                 </IconButton>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '15px' }}>
-                <Button 
+                {isRunning ? (
+                    <Button 
+                        className='pauseButton'
+                        sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
+                        startIcon={<PauseCircleOutlineRoundedIcon/>}
+                        onClick={pauseTimer}
+                    >
+                        <Typography variant='h4' sx={{color: BaseWorkStyles.colors.primary.dark}}>Tauko</Typography>
+                    </Button>
+                ) : (
+                    <Button 
                     className='pauseButton'
                     sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
-                    startIcon={<PauseCircleOutlineRoundedIcon/>}
-                >
-                    <Typography variant='h4' sx={{color: BaseWorkStyles.colors.primary.dark}}>Tauko</Typography>
-                </Button>
+                    startIcon={<PlayCircleOutlineRoundedIcon/>}
+                    onClick={startTimer}
+                    >
+                        <Typography variant='h4' sx={{color: BaseWorkStyles.colors.primary.dark}}>Jatka</Typography>
+                    </Button>
+                )}
                 <Button 
                     className='stopButton'
                     sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
-                    startIcon={<StopCircleRoundedIcon/>}
+                    startIcon={<PlayCircleOutlineRoundedIcon/>}
                 >
                     <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Päätä työpäivä</Typography>
                 </Button>

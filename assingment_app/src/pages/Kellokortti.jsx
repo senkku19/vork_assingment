@@ -20,7 +20,7 @@ const Kellokortti = () => {
                 { timecard &&
                     <Box sx= {{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '5px', alignItems: 'center', backgroundColor: BaseWorkStyles.colors.primary.dark, borderRadius: '20px', padding: '5px', margin: '20px' }}>
                         <CircleIcon sx={{ fontSize: 'x-small', color: BaseWorkStyles.colors.primary.activate }}/>
-                        <Typography variant='h4' sx={{color: 'white', padding: '10px'}}>{hours} h {minutes} min</Typography>
+                        <Typography variant='h4' sx={{color: 'white'}}>{hours} h {minutes} min</Typography>
                     </Box>
                 }
             </Box>

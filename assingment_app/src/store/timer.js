@@ -10,6 +10,9 @@ const useTimerStore = create(
         startTimer: () => {
             set({ isRunning: true });
         },
+        pauseTimer: () => {
+            set({ isRunning: false })
+        },
         setTimer: () => {
             set({ 
                 timer: get().timer + 1,
