@@ -89,10 +89,11 @@ const VorkTheme = createTheme({
                         display: 'flex',
                         flexDirection: 'column',
                         flex: 1,
+                        gap: '15px',
                         height: '100%',
                         borderTopLeftRadius: '20px',
                         borderTopRightRadius: '20px',
-                        overflow: 'hidden',
+                        overflowY: 'scroll',
                         padding: '0px !importannt',
                         backgroundColor: BaseWorkStyles.colors.secondary.light,
                     }
@@ -120,6 +121,7 @@ const VorkTheme = createTheme({
                         flexDirection: 'column',
                         width: '100%',
                         alignItems: 'center',
+                        overflow: 'unset',
                         borderRadius: '5px',
                         boxShadow: 'none',
                         gap: '30px',
@@ -144,7 +146,38 @@ const VorkTheme = createTheme({
                         alignItems: 'center',
                         padding: '10px'
                     }
-                }
+                },
+                {
+                    props: {className: 'stopButton'},
+                    style: {
+                        backgroundColor: BaseWorkStyles.colors.primary.stop,
+                        textTransform: 'none',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        color: 'white',
+                        width: '100%',
+                        gap: '5px',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '10px'
+                    }
+                },
+                {
+                    props: {className: 'pauseButton'},
+                    style: {
+                        backgroundColor: 'white',
+                        border: `2px solid ${BaseWorkStyles.colors.secondary.dark}`,
+                        textTransform: 'none',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        color: BaseWorkStyles.colors.primary.dark,
+                        width: '100%',
+                        gap: '5px',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '10px'
+                    }
+                },
             ]
 
         },

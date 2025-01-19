@@ -7,6 +7,7 @@ const BaseWorkStyles = {
             dark: '#012A49',
             light: '#11A6D2',
             activate: '#007C00',
+            stop: '#CF0000',
         },
         secondary: {
             light: '#F4F4F4',

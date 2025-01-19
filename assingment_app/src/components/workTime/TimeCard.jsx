@@ -5,11 +5,15 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import Time from './Time';
 import BaseWorkStyles from '../../styles/BaseWorkStyles';
-import TimeCardService from '../../services/timeCard'
+import useTimeCardStore from '../../store/timeCard';
+import useTimerStore from '../../store/timer';
 import { format } from "date-fns";
 
 const TimeCard = () => {
     const [loggedTime, setLoggedTime] = useState();
+    const createTimeCard = useTimeCardStore(state => state.createTimeCard);
+    const timeCard = useTimeCardStore(state => state.timeCard)
+    const startTimer = useTimerStore(state => state.startTimer)
 
     const getCurrentTime = () => {
         const time = new Date();
@@ -17,14 +21,21 @@ const TimeCard = () => {
     }
 
     useEffect(() => {
-        getCurrentTime();
-    }, [])
+        if (!timeCard) {
+            getCurrentTime();
+            const interval = setInterval(getCurrentTime, 1000);
+            return () => clearInterval(interval);
+        } else {
+            setLoggedTime(timeCard.startTime);
+        }
+    }, [timeCard]);
 
     const startWorkDay = () => {
-        TimeCardService.create({
+        createTimeCard({
             date: format(new Date(), 'yyyy-MM-dd'),
             startTime: loggedTime
         })
+        startTimer();
     }
 
 
@@ -37,14 +48,22 @@ const TimeCard = () => {
                     <EditNoteRoundedIcon sx={{color: BaseWorkStyles.colors.primary.light}}/>
                 </IconButton>
             </Box>
-            <Button 
-                className='activateButton'
-                sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
-                startIcon={<PlayCircleOutlineRoundedIcon/>}
-                onClick={()=> startWorkDay()}
+            {timeCard ? (
+                <Button 
+                    className='activateButton'
+                 >
+                    <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Kirjaudu työmaalle</Typography>
+                </Button>
+                ) : (
+                <Button 
+                    className='activateButton'
+                    sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
+                    startIcon={<PlayCircleOutlineRoundedIcon/>}
+                    onClick={()=> startWorkDay()}
                 >
-                <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Aloita työpäivä</Typography>
-            </Button>
+                    <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Aloita työpäivä</Typography>
+                </Button>
+            )}
         </Card>
     )
     
