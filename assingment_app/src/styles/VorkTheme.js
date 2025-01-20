@@ -234,17 +234,32 @@ const VorkTheme = createTheme({
                     },
                     [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
                         borderRadius: '11px',
-                        borderColor: 'white',
+                        border: '1px solid white',
                       },
                     [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-                        borderColor: 'white',
+                        border: '1px solid white',
                       },
                     input: {
                         padding: '14px 16px 12px', 
                     },
                 }
             }
-        }
+        },
+        MuiSelect: {
+            defaultProps: {
+                variant: 'outlined',
+            },
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'white',
+                    borderRadius: '11px',
+                    margin: '10px',
+                    "&.Mui-focused": {
+                        borderRadius: '11px',
+                    },
+                }
+            }
+        },
     },
 }
 )

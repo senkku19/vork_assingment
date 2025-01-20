@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Container, Typography, Box, TextField, InputAdornment } from "@mui/material";
+import { Container, Typography, Box, TextField, InputAdornment, FormControl, Select, MenuItem, InputLabel } from "@mui/material";
 import { parse, parseISO } from "date-fns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
@@ -10,6 +10,8 @@ import useTimeCardStore from "../../store/timeCard";
 const SummaryForm = () => {
     const timeCard = useTimeCardStore(state => state.timeCard)
     const [ overTime, setOverTime ] = useState(timeCard ? timeCard.overTime : 0)
+    const [ travellingTime, setTravellingTime ] = useState(timeCard ? timeCard.travellingTime : 0);
+    const [ compensation, setCompensation ] = useState('');
 
 
     return(
@@ -54,15 +56,36 @@ const SummaryForm = () => {
                     <TimePicker
                         label="Tauon aloitus"
                         ampm={false}
-                        value={parse(timeCard.breakTime.start, "HH:mm", new Date())}
+                        value={parse(timeCard.breakStart, "HH:mm", new Date())}
 
                     />
                     <TimePicker
                         label="Tauon lopetus"
                         ampm={false}
-                        value={parse(timeCard.breakTime.end, "HH:mm", new Date())}
+                        value={parse(timeCard.breakEnd, "HH:mm", new Date())}
                     />
                 </Box>
+                <TextField
+                    label="Matkustusaika"
+                    slotProps={{
+                        input: {
+                             endAdornment: <InputAdornment position="end">h</InputAdornment>
+                        }
+                    }}
+                    type="number"
+                    value={travellingTime}
+                    onChange={e => setTravellingTime(e.target.value)}
+                />
+                <TextField
+                        label="Korvaustapa"
+                        select
+                        value={compensation}
+                >
+                    <MenuItem>Kokopäiväraha</MenuItem>
+                    <MenuItem>Osapäiväraha</MenuItem>
+                    <MenuItem>Ateriakorvaus</MenuItem>
+                    <MenuItem>Sairaana</MenuItem>
+                </TextField>
             </Box>
          </LocalizationProvider>
     )

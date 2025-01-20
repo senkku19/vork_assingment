@@ -15,10 +15,8 @@ timeCardsRouter.post('/', ( req, res, next ) => {
         startTime: body.startTime,
         endTime: body.endTime || '0',
         overTime: body.overTime || '0',
-        breakTime: {
-            start: body.breakTime?.start || '',
-            end: body.breakTime?.end || ''
-        },
+        breakStart: body.breakStart || '',
+        breakEnd: body.breakEnd || '',
         travellingTime: body.travellingTime || '0',
         kokoPaivaRaha: body.kokoPaivaRaha || false,
         osaPaivaRaha: body.osaPaivaRaha || false,
@@ -59,15 +57,10 @@ timeCardsRouter.put('/:id', async (req, resp, next) => {
         startTime: body.startTime,
         endTime: body.endTime,
         overTime: body.overTime,
-        breakTime: {
-            start: body.breakTime?.start,
-            end: body.breakTime?.end
-        },
+        breakStart: body.breakStart,
+        breakEnd: body.breakEnd,
         travellingTime: body.travellingTime,
-        kokoPaivaRaha: body.kokoPaivaRaha,
-        osaPaivaRaha: body.osaPaivaRaha,
-        ateriaKorvaus: body.ateriaKorvaus,
-        sairaana: body.sairaana
+        compensation: body.compensation
     }
 
     TimeCard.findByIdAndUpdate(req.params.id, updatedTimeCard, { new: true })

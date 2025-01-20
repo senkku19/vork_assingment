@@ -14,15 +14,14 @@ const timeCardSchema = new mongoose.Schema({
         required: true
     },
     overTime: String,
-    breakTime: {
-        start: String,
-        end: String
-    },
+    breakStart: String,
+    breakEnd: String,
     travellingTime: String,
-    kokoPaivaRaha: Boolean,
-    osaPaivaRaha: Boolean,
-    ateriaKorvaus: Boolean,
-    sairaana: Boolean
+    compensation: {
+        type: String,
+        enum: ['Kokopäiväraha', 'Osapäiväraha', 'Ateriakorvaus', 'Sairaana'],
+        default: 'Kokopäiväraha'
+    }
 })
 
 timeCardSchema.set('toJSON', {

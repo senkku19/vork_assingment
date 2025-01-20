@@ -32,14 +32,14 @@ const WorkTimeCard = () => {
         pauseTimer();
         const time = new Date();
         const start = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
-        updateTimeCard(timeCard.id, {breakTime: { ...timeCard.breakTime, start }})
+        updateTimeCard(timeCard.id, { breakStart: start })
     }
 
     const handleBreakEnd = () => {
         startTimer();
         const time = new Date();
         const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
-        updateTimeCard(timeCard.id, {breakTime: { ...timeCard.breakTime, end }});
+        updateTimeCard(timeCard.id, {breakEnd: end });
     }
 
     return (

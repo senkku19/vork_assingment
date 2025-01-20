@@ -24,6 +24,7 @@ const useTimeCardStore = create(
             try {
                 get().setLoading(true);
                 const response = await TimeCardService.update(id, updatedFields);
+                console.log(response)
                 set({ timeCard: response })
             } finally {
                 get().setLoading(false);
