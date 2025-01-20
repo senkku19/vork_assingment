@@ -7,13 +7,40 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import BaseWorkStyles from '../../../styles/BaseWorkStyles';
 import Timer from './Timer';
+import { useNavigate } from 'react-router-dom';
 import useTimerStore from '../../../store/timer';
+import useTimeCardStore from '../../../store/timeCard';
 
 const WorkTimeCard = () => {
     const isRunning = useTimerStore(state => state.isRunning);
+    const stopTimer = useTimerStore(state => state.stopTimer);
     const pauseTimer = useTimerStore(state => state.pauseTimer);
     const startTimer = useTimerStore(state => state.startTimer);
+    const timeCard = useTimeCardStore(state => state.timeCard);
+    const updateTimeCard = useTimeCardStore(state => state.updateTimeCard);
+    const navigate = useNavigate();
 
+    const endWorkDay = () => {
+        stopTimer();
+        const time = new Date();
+        const endTime = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
+        updateTimeCard(timeCard.id, { endTime: endTime })
+        navigate(`/${timeCard.id}/yhteenveto`)
+    }
+
+    const handleBreakStart = () => {
+        pauseTimer();
+        const time = new Date();
+        const start = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
+        updateTimeCard(timeCard.id, {breakTime: { ...timeCard.breakTime, start }})
+    }
+
+    const handleBreakEnd = () => {
+        startTimer();
+        const time = new Date();
+        const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
+        updateTimeCard(timeCard.id, {breakTime: { ...timeCard.breakTime, end }});
+    }
 
     return (
         <Card className = 'timeCardBase'>
@@ -33,7 +60,7 @@ const WorkTimeCard = () => {
                         className='pauseButton'
                         sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
                         startIcon={<PauseCircleOutlineRoundedIcon/>}
-                        onClick={pauseTimer}
+                        onClick={handleBreakStart}
                     >
                         <Typography variant='h4' sx={{color: BaseWorkStyles.colors.primary.dark}}>Tauko</Typography>
                     </Button>
@@ -42,7 +69,7 @@ const WorkTimeCard = () => {
                     className='pauseButton'
                     sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
                     startIcon={<PlayCircleOutlineRoundedIcon/>}
-                    onClick={startTimer}
+                    onClick={handleBreakEnd}
                     >
                         <Typography variant='h4' sx={{color: BaseWorkStyles.colors.primary.dark}}>Jatka</Typography>
                     </Button>
@@ -50,7 +77,8 @@ const WorkTimeCard = () => {
                 <Button 
                     className='stopButton'
                     sx={{ "& .MuiButton-startIcon": { margin: "0px" }}}
-                    startIcon={<PlayCircleOutlineRoundedIcon/>}
+                    startIcon={<StopCircleRoundedIcon/>}
+                    onClick={endWorkDay}
                 >
                     <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Päätä työpäivä</Typography>
                 </Button>

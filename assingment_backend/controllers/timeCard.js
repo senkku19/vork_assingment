@@ -1,5 +1,4 @@
 const timeCardsRouter = require('express').Router()
-const { response } = require('express')
 const TimeCard = require('../models/timeCards')
 
 timeCardsRouter.get('/', ( req, res ) => {
@@ -34,6 +33,16 @@ timeCardsRouter.post('/', ( req, res, next ) => {
         .catch(error => next(error))
 })
 
+timeCardsRouter.get('/:id', async (req, res) => {
+    const timeCard = await TimeCard.findById(req.params.id);
+    
+    if (timeCard) {
+        res.json(timeCard)
+    } else {
+        res.status(404).end
+    }
+})
+
 timeCardsRouter.delete('/:id', ( req, res, next ) => { 
     TimeCard.findByIdAndDelete(req.params.id)
         .then(() => {
@@ -42,10 +51,10 @@ timeCardsRouter.delete('/:id', ( req, res, next ) => {
         .catch(error => next(error))
 })
 
-timeCardsRouter.put('/:id', (req, resp, next) => {
-    const body = request.body
+timeCardsRouter.put('/:id', async (req, resp, next) => {
+    const body = req.body
 
-    const timeCard = {
+    const updatedTimeCard = {
         date: body.date,
         startTime: body.startTime,
         endTime: body.endTime,
@@ -61,9 +70,9 @@ timeCardsRouter.put('/:id', (req, resp, next) => {
         sairaana: body.sairaana
     }
 
-    TimeCard.findByIdAndUpdate(req.params.id, timeCard, { new: true })
+    TimeCard.findByIdAndUpdate(req.params.id, updatedTimeCard, { new: true })
         .then(updatedTimeCard => {
-            response.json(updatedTimeCard)
+            resp.json(updatedTimeCard)
         })
         .catch(error => next(error))
 })

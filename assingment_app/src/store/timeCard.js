@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import TimeCardService from '../services/timeCard';
+import timeCard from '../services/timeCard';
 
 const useTimeCardStore = create(
     devtools((set, get) => ({
@@ -19,6 +20,15 @@ const useTimeCardStore = create(
                 get().setLoading(false);
             }
         },
+        updateTimeCard: async (id, updatedFields) => {
+            try {
+                get().setLoading(true);
+                const response = await TimeCardService.update(id, updatedFields);
+                set({ timeCard: response })
+            } finally {
+                get().setLoading(false);
+            }
+        }
         
 })));
 

@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Kellokortti from "./pages/Kellokortti";
 import WorkTime from "./components/workTime/WorkTime";
+import DaySummery from "./pages/DaySummery";
 
 const Router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const Router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: '/:id/yhteenveto',
+        element: <DaySummery />
+    }
 ])
 
 export default Router;

@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles"; 
 import BaseWorkStyles from "./BaseWorkStyles";
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 const VorkTheme = createTheme({
     palette: {
@@ -181,6 +182,69 @@ const VorkTheme = createTheme({
             ]
 
         },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    fontSize: BaseWorkStyles.typograph.fontSize.medium,
+                    fontWeight: BaseWorkStyles.typograph.fontWeight.medium,
+                    padding: '5px 0px',
+                    '& input': {
+                        padding: '10px 0px'
+                    }
+                }
+            }
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: BaseWorkStyles.colors.primary.dark,
+                    fontSize: BaseWorkStyles.typograph.fontSize.medium,
+                    fontWeight: BaseWorkStyles.typograph.fontWeight.medium,
+                    transform: 'translate(16px, 16px)',
+                },
+                shrink: {
+                    transform: 'translate(16px, 6px) scale(0.666)',
+                    
+                }
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'outlined',
+            },
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'white',
+                    borderRadius: '11px',
+                    margin: '10px',
+                    "&.Mui-focused": {
+                        borderRadius: '11px',
+                    },
+                }
+            }
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                notchedOutline: {
+                    borderColor: 'none',
+                },
+                root: {
+                    "&.Mui-focused": {
+                        borderRadius: '11px',
+                    },
+                    [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
+                        borderRadius: '11px',
+                        borderColor: 'white',
+                      },
+                    [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
+                        borderColor: 'white',
+                      },
+                    input: {
+                        padding: '14px 16px 12px', 
+                    },
+                }
+            }
+        }
     },
 }
 )

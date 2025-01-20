@@ -19,6 +19,14 @@ const useTimerStore = create(
                 hours: Math.floor(get().timer/3600),
                 minutes: Math.floor( (get().timer % 3600) / 60)
             })
+        },
+        stopTimer: () => {
+            set({ 
+                isRunning: false,
+                timer: 0,
+                hours: 0,
+                minutes: 0 
+            })
         }
    
     

@@ -6,9 +6,14 @@ const getAll = () => {
     return request.then(response => response.data)
 }
 
-const create = async newTimeCard => {
+const create = async (newTimeCard) => {
     const response = await axios.post(baseUrl, newTimeCard)
     return response.data
 }
 
-export default { getAll, create }
+const update = async (id, updatedFields) => {
+    const request = axios.put(`${baseUrl}/${id}`, updatedFields);
+    return request.then(response => response.data);
+}
+
+export default { getAll, create, update }
