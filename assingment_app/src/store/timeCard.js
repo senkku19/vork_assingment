@@ -24,12 +24,20 @@ const useTimeCardStore = create(
             try {
                 get().setLoading(true);
                 const response = await TimeCardService.update(id, updatedFields);
-                console.log(response)
                 set({ timeCard: response })
             } finally {
                 get().setLoading(false);
             }
-        }
+        },
+        acceptTimeCard: async (id, updatedFields) => {
+            try {
+                get().setLoading(true);
+                await TimeCardService.update(id, updatedFields);
+                set({ timeCard: null })
+            } finally {
+                get().setLoading(false);
+            }
+        },
         
 })));
 

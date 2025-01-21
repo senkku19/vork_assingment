@@ -13,7 +13,6 @@ import useTimeCardStore from '../../../store/timeCard';
 
 const WorkTimeCard = () => {
     const isRunning = useTimerStore(state => state.isRunning);
-    const stopTimer = useTimerStore(state => state.stopTimer);
     const pauseTimer = useTimerStore(state => state.pauseTimer);
     const startTimer = useTimerStore(state => state.startTimer);
     const timeCard = useTimeCardStore(state => state.timeCard);
@@ -21,7 +20,7 @@ const WorkTimeCard = () => {
     const navigate = useNavigate();
 
     const endWorkDay = () => {
-        stopTimer();
+        pauseTimer();
         const time = new Date();
         const endTime = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
         updateTimeCard(timeCard.id, { endTime: endTime })
@@ -39,7 +38,7 @@ const WorkTimeCard = () => {
         startTimer();
         const time = new Date();
         const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
-        updateTimeCard(timeCard.id, {breakEnd: end });
+        updateTimeCard(timeCard.id, { breakEnd: end });
     }
 
     return (

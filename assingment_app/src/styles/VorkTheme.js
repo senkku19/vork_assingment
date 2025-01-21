@@ -226,7 +226,8 @@ const VorkTheme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 notchedOutline: {
-                    borderColor: 'none',
+                    borderColor: 'transparent',
+                    maxWidth: 'none'
                 },
                 root: {
                     "&.Mui-focused": {
@@ -234,14 +235,17 @@ const VorkTheme = createTheme({
                     },
                     [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
                         borderRadius: '11px',
-                        border: '1px solid white',
+                        border: `1px solid ${BaseWorkStyles.colors.primary.dark}`,
                       },
                     [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-                        border: '1px solid white',
+                        border: `1px solid ${BaseWorkStyles.colors.primary.dark}`,
                       },
                     input: {
                         padding: '14px 16px 12px', 
                     },
+                    legend: {
+                        maxWidth: 0
+                    }
                 }
             }
         },
@@ -254,6 +258,7 @@ const VorkTheme = createTheme({
                     backgroundColor: 'white',
                     borderRadius: '11px',
                     margin: '10px',
+                    padding: '14px 16px 12px',
                     "&.Mui-focused": {
                         borderRadius: '11px',
                     },
