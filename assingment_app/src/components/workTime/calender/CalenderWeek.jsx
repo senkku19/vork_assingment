@@ -44,8 +44,8 @@ const CalenderWeek = () => {
        const nextWeekEnd = endOfWeek(new Date(end.getTime() + 7), { weekStartsOn: 1} );
        setCurrentWeek(eachDayOfInterval({ start: nextWeekStarts, end: nextWeekEnd }));
        setWeekNumber(getWeek(nextWeekStarts, { weekStartsOn: 1}));
-       setCurrentMonth(monthsFin[getMonth(nextWeekStarts)]);
-       setDateHelper(nextWeekStarts)
+       setCurrentMonth(monthsFin[getMonth(nextWeekEnd)]);
+       setDateHelper(nextWeekEnd)
     }
 
     const getPreviousWeek = () => {
@@ -54,8 +54,8 @@ const CalenderWeek = () => {
        const previousWeekEnd = endOfWeek(new Date(start.getTime() - 7), { weekStartsOn: 1} );
        setCurrentWeek(eachDayOfInterval({ start: previousWeekStarts, end: previousWeekEnd }));
        setWeekNumber(getWeek(previousWeekStarts, { weekStartsOn: 1}));
-       setCurrentMonth(monthsFin[getMonth(previousWeekStarts)]);
-       setDateHelper(previousWeekStarts);
+       setCurrentMonth(monthsFin[getMonth(previousWeekEnd)]);
+       setDateHelper(previousWeekEnd);
     }
 
     useEffect(() => {

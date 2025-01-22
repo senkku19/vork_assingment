@@ -38,6 +38,15 @@ const useTimeCardStore = create(
                 get().setLoading(false);
             }
         },
+        fetchTimeCards: async () => {
+            try {
+                get().setLoading(true);
+                const response = await TimeCardService.getAll();
+                set({ timeCards: response })
+            } finally {
+                get().setLoading(false);
+            }
+        }
         
 })));
 

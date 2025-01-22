@@ -6,7 +6,7 @@ const NestedNavigationBar = () => {
         <Container disableGutters component={'nav'} className="nestedNavigation">
             <NestedNavigationItem to='/kellokortti/tyoaika' label='Työaika'/>
             <NestedNavigationItem to='*' label='Projektitunnit'/>
-            <NestedNavigationItem to='*' label='Koonti'/>
+            <NestedNavigationItem to='/kellokortti/koonti' label='Koonti'/>
         </Container>
     )
 }
