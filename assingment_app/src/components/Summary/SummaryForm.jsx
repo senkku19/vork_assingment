@@ -17,6 +17,7 @@ const SummaryForm = () => {
     const [ overTime, setOverTime ] = useState(timeCard ? timeCard.overTime : 0)
     const [ travellingTime, setTravellingTime ] = useState(timeCard ? timeCard.travellingTime : 0);
     const [ compensation, setCompensation ] = useState('');
+    const [ compensationError, setCompensationError ] = useState(false);
     const acceptTimeCard = useTimeCardStore(state => state.acceptTimeCard);
     const stopTimer = useTimerStore(state => state.stopTimer)
     const navigation = useNavigate();
@@ -43,7 +44,12 @@ const SummaryForm = () => {
         setCompensation(event.target.value)
     }
 
-    const handleAccept = () => {
+    const handleAccept = (event) => {
+        event.preventDefault();
+        if (!compensation){
+            setCompensationError(true);
+            return;
+        }
         acceptTimeCard(timeCard.id, {
             date: timeCard.date,
             startTime: timeCard.startTime,
@@ -68,7 +74,7 @@ const SummaryForm = () => {
                     flexDirection: 'column',
                     flex: 1
                 }}
-                onSubmit={handleAccept}
+                onSubmit={(e) => handleAccept(e)}
             >
                 <Typography variant="h4"  sx={{ color: BaseWorkStyles.colors.primary.dark, margin: '20px 10px 0px'}}>Työpäiväsi</Typography>
                 <Typography variant="body2"  sx={{ color: BaseWorkStyles.colors.primary.dark, margin: '10px'}}>Tarkista ja muokkaa työpäiväsi tietoja:</Typography>
@@ -100,22 +106,22 @@ const SummaryForm = () => {
                              endAdornment: <InputAdornment position="end">h</InputAdornment>
                         }
                     }}
-                    type="number"
-                    value={overTime}
+                    inputProps={{ inputMode: 'decimal' }}
+                    value={overTime ? overTime : ''}
                     onChange={e => setOverTime(e.target.value)}
                 />
                 <Box sx= { rowStyle }>
                     <TimePicker
                         label="Tauon aloitus"
                         ampm={false}
-                        value={parse(timeCard.breakStart, "HH:mm", new Date())}
+                        value={timeCard.breakStart ? parse(timeCard.breakStart, "HH:mm", new Date()) : new Date(0, 0, 0, 0, 0)}
                         onChange={(newValue) => timeCard.breakStart = handleTimeChanges(newValue)}
                     />
                     <Typography variant='h2' sx={{ color: BaseWorkStyles.colors.primary.dark }}>-</Typography>
                     <TimePicker
                         label="Tauon lopetus"
                         ampm={false}
-                        value={parse(timeCard.breakEnd, "HH:mm", new Date())}
+                        value={timeCard.breakEnd ? parse(timeCard.breakEnd, "HH:mm", new Date()) : new Date(0, 0, 0, 0, 0)}
                         onChange={(newValue) => timeCard.breakEnd = handleTimeChanges(newValue)}
                     />
                 </Box>
@@ -126,8 +132,8 @@ const SummaryForm = () => {
                              endAdornment: <InputAdornment position="end">h</InputAdornment>
                         }
                     }}
-                    type="number"
-                    value={travellingTime}
+                    inputProps={{ inputMode: 'decimal' }}
+                    value={travellingTime ? travellingTime : ''}
                     onChange={e => setTravellingTime(e.target.value)}
                 />
                 <TextField
@@ -135,9 +141,11 @@ const SummaryForm = () => {
                         select
                         value={compensation}
                         onChange={handleSelect}
+                        error={compensationError}
+                        helperText={compensationError ? "Korvaustapa on pakollinen" : ""}
                 >
-                    <MenuItem value="kokopäiväraha">Kokopäiväraha</MenuItem>
-                    <MenuItem value="osapäiväraha">Osapäiväraha</MenuItem>
+                    <MenuItem value="kokopaivaraha">Kokopäiväraha</MenuItem>
+                    <MenuItem value="osapaivaraha">Osapäiväraha</MenuItem>
                     <MenuItem value="ateriakorvaus">Ateriakorvaus</MenuItem>
                     <MenuItem value="sairaana">Sairaana</MenuItem>
                 </TextField>

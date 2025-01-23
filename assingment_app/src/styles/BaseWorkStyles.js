@@ -28,6 +28,7 @@ const BaseWorkStyles = {
             xs: '10px',
             small: '12px',
             medium: '14px',
+            mediumInput: '16px',
             large: '24px',
             xlarge: '32px',
             xxlarge: '48px' 

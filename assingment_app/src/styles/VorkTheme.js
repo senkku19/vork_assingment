@@ -96,6 +96,7 @@ const VorkTheme = createTheme({
                         borderTopRightRadius: '20px',
                         overflowY: 'scroll',
                         padding: '0px !importannt',
+                        paddingBottom: '10px',
                         backgroundColor: BaseWorkStyles.colors.secondary.light,
                     }
                 },
@@ -185,9 +186,10 @@ const VorkTheme = createTheme({
         MuiInputBase: {
             styleOverrides: {
                 root: {
-                    fontSize: BaseWorkStyles.typograph.fontSize.medium,
+                    fontSize: BaseWorkStyles.typograph.fontSize.mediumInput,
                     fontWeight: BaseWorkStyles.typograph.fontWeight.medium,
                     padding: '5px 0px',
+                    backgroundColor: 'white',
                     '& input': {
                         padding: '10px 0px'
                     }
@@ -198,7 +200,7 @@ const VorkTheme = createTheme({
             styleOverrides: {
                 root: {
                     color: BaseWorkStyles.colors.primary.dark,
-                    fontSize: BaseWorkStyles.typograph.fontSize.medium,
+                    fontSize: BaseWorkStyles.typograph.fontSize.mediumInput,
                     fontWeight: BaseWorkStyles.typograph.fontWeight.medium,
                     transform: 'translate(16px, 16px)',
                 },
@@ -214,7 +216,6 @@ const VorkTheme = createTheme({
             },
             styleOverrides: {
                 root: {
-                    backgroundColor: 'white',
                     borderRadius: '11px',
                     margin: '10px',
                     "&.Mui-focused": {
@@ -261,6 +262,9 @@ const VorkTheme = createTheme({
                     padding: '14px 16px 12px',
                     "&.Mui-focused": {
                         borderRadius: '11px',
+                    },
+                    input: {
+                        padding: '14px 14px', 
                     },
                 }
             }

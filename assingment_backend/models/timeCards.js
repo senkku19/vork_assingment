@@ -19,8 +19,8 @@ const timeCardSchema = new mongoose.Schema({
     travellingTime: String,
     compensation: {
         type: String,
-        enum: ['Kokopäiväraha', 'Osapäiväraha', 'Ateriakorvaus', 'Sairaana'],
-        default: 'Kokopäiväraha'
+        enum: ['Kokopaivaraha', 'Osapaivaraha', 'Ateriakorvaus', 'Sairaana'],
+        default: 'Kokopaivaraha'
     }
 })
 
