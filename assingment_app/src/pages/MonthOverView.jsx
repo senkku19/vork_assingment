@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { startOfMonth, endOfMonth, subMonths, getMonth, addMonths, } from "date-fns";
 import CalenderMonth from "../components/OverView/CalenderMonth";
-import TimeCardList from "../components/OverView/TimeCardList";
+import OverViewInfo from "../components/OverView/OverViewInfo";
 import { Container } from "@mui/material";
 import useTimeCardStore from "../store/timeCard";
 
@@ -37,7 +37,7 @@ const MonthOverView = () => {
     return(
         <Container className='pageContentWrapper'>
             <CalenderMonth date={helperDate} getNextMonth={getNextMonth} getPreviousMonth={getPreviousMonth} />
-            <TimeCardList currentDate={helperDate} />
+            <OverViewInfo currentDate={helperDate} />
         </Container>
     )
 }

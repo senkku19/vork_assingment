@@ -269,6 +269,17 @@ const VorkTheme = createTheme({
                 }
             }
         },
+        MuiFormHelperText: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-error": {
+                        fontSize: BaseWorkStyles.typograph.fontSize.xs,
+                        width: '100%'
+                    },
+                }
+            }
+            
+        },
     },
 }
 )

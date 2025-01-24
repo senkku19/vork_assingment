@@ -1,6 +1,6 @@
 import axios from 'axios'
-//const baseUrl = 'http://localhost:3001/api/timeCards'
-const baseUrl = 'http://192.168.0.4:3001/api/timeCards'
+const baseUrl = 'http://localhost:3001/api/timeCards'
+//const baseUrl = 'http://ip:3001/api/timeCards'
 
 const getAll = () => {
     const request = axios.get(baseUrl)

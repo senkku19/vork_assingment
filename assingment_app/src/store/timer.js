@@ -11,7 +11,7 @@ const useTimerStore = create(
             set({ isRunning: true });
         },
         pauseTimer: () => {
-            set({ isRunning: false })
+            set({ isRunning: false });
         },
         setTimer: () => {
             set({ 
