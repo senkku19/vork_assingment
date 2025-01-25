@@ -55,6 +55,13 @@ const SummaryForm = () => {
         gap: "10px",
     };
 
+    const validateNumber = (value) => {
+        const isNumeric = value.match(/^\d+(\.\d{2})?$/)
+
+        return isNumeric !== null;
+    }
+
+
     const validateForm = (data) => {
         let isValid = true;
 
@@ -102,7 +109,23 @@ const SummaryForm = () => {
                 message: "Korvaustapa on pakollinen."
             })
             isValid = false;
-          }
+        }
+
+        if (!validateNumber(data.travellingTime)) {
+            setError("travellingTime", {
+                type: "manual",
+                message: "Matkustusajan on oltava kokonaisluku tai desimaaliluku"
+            })
+            isValid = false
+        }
+
+        if (!validateNumber(data.overTime)) {
+            setError("overTime", {
+                type: "manual",
+                message: "Ylityötunnit on oltava kokonaisluku tai desimaaliluku"
+            })
+            isValid = false
+        }
 
           return isValid;
     };
@@ -218,6 +241,8 @@ const SummaryForm = () => {
                             inputProps={{ 
                                 inputMode: "decimal"
                             }}
+                            error={!!errors.overTime}
+                            helperText={errors?.overTime?.message}
                         />
                     }
                 />
@@ -276,13 +301,15 @@ const SummaryForm = () => {
                             {...field}
                             label="Matkustusaika"
                             slotProps={{
-                            input: {
-                                endAdornment: <InputAdornment position="end">h</InputAdornment>,
-                            },
+                                input: {
+                                    endAdornment: <InputAdornment position="end">h</InputAdornment>,
+                                },
                             }}
                             inputProps={{ 
                                 inputMode: "decimal"
                             }}
+                            error={!!errors.travellingTime}
+                            helperText={errors?.travellingTime?.message}
                         />
                     }
                 />
