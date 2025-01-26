@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import NavigationBar from "../components/Navigation/menu/NavigationBar";
 import NestedNavigationBar from "../components/Navigation/nestedMenu/NestedNavigationBar";
 import { Container, Typography, Box } from "@mui/material";
@@ -12,6 +12,16 @@ const Kellokortti = () => {
     const timecard = useTimeCardStore(state => state.timeCard);
     const hours = useTimerStore(state => state.hours)
     const minutes = useTimerStore(state => state.minutes)
+    const isRunning = useTimerStore(state => state.isRunning)
+    const setTimer = useTimerStore(state => state.setTimer)
+
+    useEffect(() => {
+        let interval;
+        if (isRunning) {
+            interval = setInterval(() => setTimer(), 1000);
+        }
+        return () => clearInterval(interval);
+    }, [isRunning]);
 
     return(
         <Container className="pageWrapper">
@@ -19,7 +29,11 @@ const Kellokortti = () => {
                 <Typography variant="h4" sx={{color: 'white', padding: '20px'}}>Kellokortti</Typography>
                 { timecard &&
                     <Box sx= {{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '5px', alignItems: 'center', backgroundColor: BaseWorkStyles.colors.primary.dark, borderRadius: '20px', padding: '5px', margin: '20px' }}>
-                        <CircleIcon sx={{ fontSize: 'x-small', color: BaseWorkStyles.colors.primary.activate }}/>
+                         {isRunning ? (
+                            <CircleIcon sx={{ fontSize: 'x-small', color: BaseWorkStyles.colors.primary.activate }}/>
+                         ):(
+                            <CircleIcon sx={{ fontSize: 'x-small', color: BaseWorkStyles.colors.primary.stop }}/>
+                         )}
                         <Typography variant='h4' sx={{color: 'white'}}>{hours} h {minutes} min</Typography>
                     </Box>
                 }

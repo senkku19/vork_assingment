@@ -1,11 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/timeCards'
-//const baseUrl = 'http://172.20.10.8:3001/api/timeCards'
-
-const getAll = () => {
-    const request = axios.get(baseUrl)
-    return request.then(response => response.data)
-}
+const baseUrl = 'http://localhost:3001/api/runningTimeCard'
+//const baseUrl = 'http://172.20.10.8:3001/api/timeCards/running'
 
 const create = async (newTimeCard) => {
     const response = await axios.post(baseUrl, newTimeCard)
@@ -17,4 +12,8 @@ const update = async (id, updatedFields) => {
     return response.data;
 }
 
-export default { getAll, create, update }
+const deleteTimeCard = async (id) => {
+    await axios.delete(`${baseUrl}/${id}`);
+}
+
+export default { create, update, deleteTimeCard }

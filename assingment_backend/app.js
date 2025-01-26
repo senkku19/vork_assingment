@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const timeCardsRouter = require('./controllers/timeCard')
+const runningTimeCardsRouter = require('./controllers/runningTimeCard')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
@@ -24,7 +25,9 @@ app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
+
 app.use('/api/timeCards', timeCardsRouter)
+app.use('/api/runningTimeCard', runningTimeCardsRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

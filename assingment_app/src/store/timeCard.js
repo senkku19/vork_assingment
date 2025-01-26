@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import TimeCardService from '../services/timeCard';
-import timeCard from '../services/timeCard';
+import RunningTimeCardService from '../services/runningTimeCard';
 
 const useTimeCardStore = create(
     devtools((set, get) => ({
@@ -14,7 +14,7 @@ const useTimeCardStore = create(
         createTimeCard: async (timeCard) => {
             try {
                 get().setLoading(true);
-                const response = await TimeCardService.create(timeCard);
+                const response = await RunningTimeCardService.create(timeCard);
                 set({ timeCard:  response });
             } finally {
                 get().setLoading(false);
@@ -23,7 +23,7 @@ const useTimeCardStore = create(
         updateTimeCard: async (id, updatedFields) => {
             try {
                 get().setLoading(true);
-                const response = await TimeCardService.update(id, updatedFields);
+                const response = await RunningTimeCardService.update(id, updatedFields);
                 set({ timeCard: response })
             } finally {
                 get().setLoading(false);
@@ -32,7 +32,8 @@ const useTimeCardStore = create(
         acceptTimeCard: async (id, updatedFields) => {
             try {
                 get().setLoading(true);
-                await TimeCardService.update(id, updatedFields);
+                await TimeCardService.create(updatedFields);
+                await RunningTimeCardService.deleteTimeCard(id);
                 set({ timeCard: null })
             } finally {
                 get().setLoading(false);

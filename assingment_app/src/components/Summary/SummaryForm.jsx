@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Typography, Box, TextField, InputAdornment, MenuItem, Button } from "@mui/material";
-import { format, isValid, parse, parseISO } from "date-fns";
+import { format, parse, parseISO } from "date-fns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -56,51 +56,63 @@ const SummaryForm = () => {
     };
 
     const validateNumber = (value) => {
-        const isNumeric = value.match(/^\d+(\.\d{2})?$/)
-
+        const isNumeric = value.match(/^\d+([.,]\d{1,2})?$/)
         return isNumeric !== null;
+    }
+
+    const validateWorkTime = ( startTime, endTime ) => {
+        if (startTime >= endTime ) {
+            setError("endTime", {
+                type: "manual",
+                message: "Työpäivän täytyy päättyä aloitusajan jälkeen."
+            });
+            return false;
+        }
+
+        return true;
+    }
+
+    const validateBreakTime = ( breakStart, breakEnd, startTime, endTime ) => {
+
+        if (breakStart && !breakEnd) {
+            setError("breakEnd", {
+                type: "manual",
+                message: "Tauolla pitää olla aloitus ja lopetus."
+            }) 
+            return false;
+        } else if (!breakStart && breakEnd) {
+            setError("breakStart", {
+                type: "manual",
+                message: "Tauolla pitää olla aloitus ja lopetus."
+            }) 
+            return false;
+        } else if (breakStart && breakEnd) {
+            if ((breakStart < startTime) || (endTime < breakStart)) {
+                setError("breakStart", {
+                    type: "manual",
+                    message: "Tauon pitää sijoittua työajalle."
+                }) 
+                return false;
+            } else if ((breakEnd > endTime) || (breakStart >= breakEnd) ) {
+                setError("breakEnd", {
+                    type: "manual",
+                    message: "Tauko täytyy sijottua työajalla ja oikeassa järjestyksessä."
+                }) 
+                return false;
+            }
+        }
+
+        return true;
+
     }
 
 
     const validateForm = (data) => {
         let isValid = true;
 
+       isValid = validateWorkTime(data.startTime, data.endTime);
 
-        if (data.startTime >= data.endTime) {
-            setError("endTime", {
-                type: "manual",
-                message: "Työpäivän täytyy päättyä aloitusajan jälkeen."
-            })
-            isValid = false;
-        }
-
-        if (data.breakStart && !data.breakEnd) {
-            setError("breakEnd", {
-                type: "manual",
-                message: "Tauolla pitää olla aloitus ja lopetus."
-            }) 
-            isValid = false;
-        } else if (!data.breakStart && data.breakEnd) {
-            setError("breakStart", {
-                type: "manual",
-                message: "Tauolla pitää olla aloitus ja lopetus."
-            }) 
-            isValid = false;
-        } else if (data.breakStart && data.breakEnd) {
-            if ((data.breakStart<data.startTime) || (data.endTime<data.breakStart)) {
-                setError("breakStart", {
-                    type: "manual",
-                    message: "Tauon pitää sijoittua työajalle."
-                }) 
-                isValid = false;
-            } else if ((data.breakEnd>data.endTime) || (data.breakStart>=data.breakEnd) ) {
-                setError("breakEnd", {
-                    type: "manual",
-                    message: "Tauko täytyy sijottua työajalla ja oikeassa järjestyksessä."
-                }) 
-                isValid = false;
-            }
-        }
+       isValid = validateBreakTime(data.breakStart, data.breakEnd, data.startTime, data.endTime);
 
 
         if (!data.compensation) {

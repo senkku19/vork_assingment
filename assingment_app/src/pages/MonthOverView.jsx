@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { startOfMonth, endOfMonth, subMonths, getMonth, addMonths, } from "date-fns";
+import { startOfMonth, endOfMonth, subMonths, addMonths, } from "date-fns";
 import CalenderMonth from "../components/OverView/CalenderMonth";
 import OverViewInfo from "../components/OverView/OverViewInfo";
-import { Container } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import useTimeCardStore from "../store/timeCard";
 
 const MonthOverView = () => {
-    const [month, setMonth] = useState('');
     const [helperDate, setDateHelper] = useState('');
     const fetchTimeCards = useTimeCardStore(state => state.fetchTimeCards)
+    const isLoading = useTimeCardStore(state => state.isLoading)
 
     const getCurrentMonth = () => {
         const today = new Date();
@@ -28,11 +28,13 @@ const MonthOverView = () => {
     }
     
     useEffect(() => {
-        getCurrentMonth();
         fetchTimeCards();
+        getCurrentMonth();
     }, [])
 
-
+     if (isLoading) {
+            return <CircularProgress/>;
+    }
 
     return(
         <Container className='pageContentWrapper'>

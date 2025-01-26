@@ -2,9 +2,12 @@ import NavigationItem from "./NavigationItem";
 import { Container, Badge } from "@mui/material";
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import useTimeCardStore from "../../../store/timeCard";
+import useTimerStore from "../../../store/timer";
+import BaseWorkStyles from "../../../styles/BaseWorkStyles";
 
 const NavigationBar = () => {
     const timeCard = useTimeCardStore(state => state.timeCard);
+    const isRunning = useTimerStore(state => state.isRunning);
 
     const isTimeCardActive = () => {
         if (!timeCard) {
@@ -14,9 +17,15 @@ const NavigationBar = () => {
         } else {
             return(
                 <div style={{display: 'flex', justifyContent: 'center', margin: '5px'}}>
-                    <Badge variant="dot" color='success'>
-                        <AccessTimeRoundedIcon/>
-                    </Badge>
+                    { isRunning ? (
+                        <Badge variant="dot" color="success">
+                            <AccessTimeRoundedIcon/>
+                        </Badge>
+                    ) : (
+                        <Badge variant="dot" color="error">
+                            <AccessTimeRoundedIcon/>
+                        </Badge>
+                    )}
                 </div>
                 
             )

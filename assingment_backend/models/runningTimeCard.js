@@ -19,7 +19,7 @@ const timeCardSchema = new mongoose.Schema({
     travellingTime: String,
     compensation: {
         type: String,
-        enum: ['kokopaivaraha', 'osapaivaraha', 'ateriakorvaus', 'sairaana'],
+         enum: ['kokopaivaraha', 'osapaivaraha', 'ateriakorvaus', 'sairaana'],
         default: 'kokopaivaraha'
     }
 })
@@ -32,4 +32,4 @@ timeCardSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('TimeCard', timeCardSchema);
+module.exports = mongoose.model('RunningTimeCard', timeCardSchema);
