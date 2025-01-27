@@ -50,7 +50,7 @@ Kommentoi rivi 4 pois ja poista kommenti merkinnät pois 5 riviltä. Korvaa {ip}
 
 #### 3 askel
 
-Nyt käynnistä sovelluksen frontend kansio ```npm run dev``` - komennon sijaan seuraavalla komennolla:
+Nyt käynnistä sovelluksen frontend ```npm run dev``` - komennon sijaan seuraavalla komennolla:
 
 ```node
 npm run host
