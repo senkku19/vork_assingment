@@ -103,6 +103,8 @@ Sovellus hyödyntää myös seuraavia kirjastoja:
 
 * [Axios](https://axios-http.com/docs/intro)
 
+* [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
+
 ### Backend
 
 Sovelluksen backend on rakennettu käyttäen Node.js:ää ja Express:iä, ja tiedot tallennetaan MongoDB-tietokantaan.
