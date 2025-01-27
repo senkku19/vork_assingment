@@ -10,6 +10,7 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import useTimeCardStore from "../../store/timeCard";
 import useTimerStore from "../../store/timer";
+import useWorkSiteStore from "../../store/workSite";
 import BaseWorkStyles from "../../styles/BaseWorkStyles";
 import { useNavigate } from "react-router-dom";
 
@@ -41,8 +42,9 @@ const SummaryForm = () => {
     const watchStartTime = watch('startTime')
     const watchEndTime = watch('endTime')
     const watchBreakStart = watch('breakStart')
-    const acceptTimeCard = useTimeCardStore((state) => state.acceptTimeCard);
-    const stopTimer = useTimerStore((state) => state.stopTimer);
+    const acceptTimeCard = useTimeCardStore(state => state.acceptTimeCard);
+    const stopTimer = useTimerStore(state => state.stopTimer);
+    const setLoggedIn = useWorkSiteStore(state => state.setLoggedIn);
     const navigate = useNavigate();
 
 
@@ -157,6 +159,7 @@ const SummaryForm = () => {
             breakEnd: data.breakEnd ? format(data.breakEnd, "HH:mm") : null,
         });
 
+        setLoggedIn(false);
         stopTimer();
         navigate("/kellokortti");
     };

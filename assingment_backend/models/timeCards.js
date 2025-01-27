@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const workSite = require('./workSite')
 
 const timeCardSchema = new mongoose.Schema({
     date: {
@@ -21,7 +22,8 @@ const timeCardSchema = new mongoose.Schema({
         type: String,
         enum: ['kokopaivaraha', 'osapaivaraha', 'ateriakorvaus', 'sairaana'],
         default: 'kokopaivaraha'
-    }
+    },
+    workSite: String
 })
 
 timeCardSchema.set('toJSON', {

@@ -4,16 +4,19 @@ import PlayCircleOutlineRoundedIcon from '@mui/icons-material/PlayCircleOutlineR
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import Time from './Time';
-import BaseWorkStyles from '../../styles/BaseWorkStyles';
-import useTimeCardStore from '../../store/timeCard';
-import useTimerStore from '../../store/timer';
+import BaseWorkStyles from '../../../styles/BaseWorkStyles';
+import useTimeCardStore from '../../../store/timeCard';
+import useTimerStore from '../../../store/timer';
+import useWorkSiteStore from '../../../store/workSite';
 import { format } from "date-fns";
 
-const TimeCard = () => {
+const TimeCard = ({ handleOpen }) => {
     const [loggedTime, setLoggedTime] = useState();
     const createTimeCard = useTimeCardStore(state => state.createTimeCard);
-    const timeCard = useTimeCardStore(state => state.timeCard)
-    const startTimer = useTimerStore(state => state.startTimer)
+    const timeCard = useTimeCardStore(state => state.timeCard);
+    const startTimer = useTimerStore(state => state.startTimer);
+    const isLoggedIn = useWorkSiteStore(state => state.isLoggedIn);
+    const setLoggedIn = useWorkSiteStore(state => state.setLoggedIn);
 
     const getCurrentTime = () => {
         const time = new Date();
@@ -38,6 +41,10 @@ const TimeCard = () => {
         startTimer();
     }
 
+    const handleLoggingOut = () => {
+        setLoggedIn(false)
+    }
+
 
     return (
         <Card className = 'timeCardBase'>
@@ -49,11 +56,21 @@ const TimeCard = () => {
                 </IconButton>
             </Box>
             {timeCard ? (
-                <Button 
-                    className='activateButton'
-                 >
-                    <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Kirjaudu työmaalle</Typography>
-                </Button>
+                isLoggedIn ? (
+                    <Button 
+                        className='stopButton'
+                        onClick={handleLoggingOut}
+                    >
+                        <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Kirjaudu ulos työmaalta</Typography>
+                    </Button>
+                ) : (
+                    <Button 
+                        className='activateButton'
+                        onClick={handleOpen}
+                    >
+                        <Typography variant='h4' sx={{color: BaseWorkStyles.colors.secondary.light}}>Kirjaudu työmaalle</Typography>
+                    </Button>
+                )
                 ) : (
                 <Button 
                     className='activateButton'

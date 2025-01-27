@@ -189,6 +189,7 @@ const VorkTheme = createTheme({
                     fontSize: BaseWorkStyles.typograph.fontSize.mediumInput,
                     fontWeight: BaseWorkStyles.typograph.fontWeight.medium,
                     padding: '5px 0px',
+                    borderRadius: '11px !important',
                     backgroundColor: 'white',
                     '& input': {
                         padding: '10px 0px'
@@ -280,6 +281,48 @@ const VorkTheme = createTheme({
             }
             
         },
+        MuiDialog: {
+            styleOverrides: {
+                root: {
+                   form: {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        overflow: 'hidden',
+                        padding: '10px',
+                        backgroundColor: BaseWorkStyles.colors.secondary.light
+                   }
+                }
+            }
+        },
+        MuiDialogContent: {
+            styleOverrides: {
+                root: {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    overflow: 'hidden',
+                    gap: '5px',
+                    margin: '5px',
+                    width: '100%'
+                }
+            }
+        },
+        MuiDialogActions: {
+            variants: [
+                {
+                    props: { className: 'formButtons' },
+                    style: {
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '100%',
+                    }
+                }
+            ]
+        }
     },
 }
 )

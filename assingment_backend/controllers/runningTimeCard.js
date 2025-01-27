@@ -2,7 +2,7 @@ const timeCardsRouter = require('express').Router()
 const runningTimeCard = require('../models/runningTimeCard')
 
 timeCardsRouter.get('/', ( req, res ) => {
-    runningTimeCardTimeCard.find({}).then(timeCards => {
+    runningTimeCard.find({}).then(timeCards => {
         res.json(timeCards)
     })
 })
@@ -18,7 +18,8 @@ timeCardsRouter.post('/', ( req, res, next ) => {
         breakStart: body.breakStart || '',
         breakEnd: body.breakEnd || '',
         travellingTime: body.travellingTime || '0',
-        compensation: body.compensation
+        compensation: body.compensation,
+        workSite: body.workSite || null
     })
 
     timeCard.save()
@@ -57,7 +58,8 @@ timeCardsRouter.put('/:id', async (req, resp, next) => {
         breakStart: body.breakStart,
         breakEnd: body.breakEnd,
         travellingTime: body.travellingTime,
-        compensation: body.compensation
+        compensation: body.compensation,
+        workSite: body.workSite
     }
 
     runningTimeCard.findByIdAndUpdate(req.params.id, updatedTimeCard, { new: true })

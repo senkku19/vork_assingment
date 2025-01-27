@@ -21,7 +21,8 @@ const timeCardSchema = new mongoose.Schema({
         type: String,
          enum: ['kokopaivaraha', 'osapaivaraha', 'ateriakorvaus', 'sairaana'],
         default: 'kokopaivaraha'
-    }
+    },
+    workSite: String
 })
 
 timeCardSchema.set('toJSON', {

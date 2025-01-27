@@ -18,7 +18,8 @@ timeCardsRouter.post('/', ( req, res, next ) => {
         breakStart: body.breakStart || '',
         breakEnd: body.breakEnd || '',
         travellingTime: body.travellingTime || '0',
-        compensation: body.compensation
+        compensation: body.compensation,
+        workSite: body.workSite || null
     })
 
     timeCard.save()
@@ -57,7 +58,8 @@ timeCardsRouter.put('/:id', async (req, resp, next) => {
         breakStart: body.breakStart,
         breakEnd: body.breakEnd,
         travellingTime: body.travellingTime,
-        compensation: body.compensation
+        compensation: body.compensation,
+        workSite: body.workSite
     }
 
     TimeCard.findByIdAndUpdate(req.params.id, updatedTimeCard, { new: true })

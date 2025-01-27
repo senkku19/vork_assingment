@@ -53,7 +53,8 @@ const OverViewInfo = ({ currentDate }) => {
             let startTime = parse(val.startTime, "HH:mm", new Date());
             let endTime = parse(val.endTime, "HH:mm", new Date());
             let minutes = differenceInMinutes(endTime, startTime);
-            summary.workTime += parseFloat(minutes/60);
+            let hours = minutes/60
+            summary.workTime += parseFloat(hours.toFixed(2));
 
             summary.overTime += parseFloat(val.overTime.replace(/,/, '.'))
             summary.travellingTime += parseFloat(val.travellingTime.replace(/,/, '.'))

@@ -1,19 +1,17 @@
-import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/runningTimeCard'
-//const baseUrl = 'http://172.20.10.8:3001/api/timeCards/running'
+import { axiosInstance } from './axios'
 
 const create = async (newTimeCard) => {
-    const response = await axios.post(baseUrl, newTimeCard)
+    const response = await axiosInstance.post('/runningTimeCard', newTimeCard)
     return response.data
 }
 
 const update = async (id, updatedFields) => {
-    const response = await axios.put(`${baseUrl}/${id}`, updatedFields);
+    const response = await axiosInstance.put(`/runningTimeCard/${id}`, updatedFields);
     return response.data;
 }
 
 const deleteTimeCard = async (id) => {
-    await axios.delete(`${baseUrl}/${id}`);
+    await axiosInstance.delete(`/runningTimeCard/${id}`);
 }
 
 export default { create, update, deleteTimeCard }
