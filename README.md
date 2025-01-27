@@ -47,9 +47,19 @@ Kommentoi rivi 4 pois ja poista kommenti merkinnät pois 5 riviltä. Korvaa {ip}
     //baseURL: 'http://localhost:3001/api',
     baseURL: 'http://esimerkkiIP:3001/api',
 ```
+
 #### 3 askel
 
+Nyt käynnistä sovelluksen frontend kansio ```npm run dev``` - komennon sijaan seuraavalla komennolla:
+
+```node
+npm run host
+```
+
+#### 4 askel
+
 Nyt voit käyttää sovellusta puhelimellasi osoitteessa:  http://esimerkkiIP:5173/kellokortti/tyoaika
+
 
 ## Lyhyt kuvaus
 
