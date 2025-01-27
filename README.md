@@ -1,11 +1,11 @@
 ### Sisällysluettelo
 [Käyttöönotto](#Käyttöönotto)
 
-[Lyhyt kuvaus](#LyhytKuvaus)
+[Lyhyt kuvaus](#Lyhyt-Kuvaus)
 
-[Käytetty teknologia](#Käytettteknologia)
+[Käytetty teknologia](#Käytetty-teknologia)
 
-[Omat mietteet](#Omatmietteet)
+[Omat mietteet](#Omat-mietteet)
 
 ## Käyttöönotto
 
