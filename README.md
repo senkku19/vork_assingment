@@ -37,9 +37,9 @@ Varmista, että puhelimesi ja tietokoneesi käyttävät samaa netti yhetyttä.
 
 #### 2 askel
 
-Navigoi projektissa 
+Navigoi projektissa tiedostoon [axios.js](https://github.com/senkku19/vork_assingment/blob/main/assingment_app/src/services/axios.js). Tiedosto löytyy polulta ./assingment_app/src/services/axios.js.
 
-Kommentoi rivi 4 pois ja poista kommenti merkinnät pois 5 riviltä. Korvaa {ip} omalla ip osoitteellasi. 
+Kommentoi rivi 4 pois ja poista kommenti merkinnät riviltä 5. Korvaa {ip} omalla ip osoitteellasi. 
 
 **Esimerkki**
 
