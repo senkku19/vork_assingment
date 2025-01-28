@@ -7,7 +7,7 @@ const Time = ({ loggedTime }) => {
     const timeCard = useTimeCardStore(state => state.timeCard)
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', gap:'5px'  }}>
             { timeCard ? (
                 <Typography variant='body2' sx={{color: BaseWorkStyles.colors.secondary.dark}}>Työmaalle kirjautuminen</Typography>
             ) : (

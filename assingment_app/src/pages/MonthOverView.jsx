@@ -15,6 +15,11 @@ const MonthOverView = () => {
         setDateHelper(today);
     }
 
+    useEffect(() => {
+        fetchTimeCards();
+        getCurrentMonth();
+    }, [])
+
     const getNextMonth = () => {
         const endDate = endOfMonth(helperDate);
         const monthEnd = addMonths(endDate, 1)
@@ -26,18 +31,14 @@ const MonthOverView = () => {
         const monthStart = subMonths(startDate, 1);
         setDateHelper(monthStart);
     }
-    
-    useEffect(() => {
-        fetchTimeCards();
-        getCurrentMonth();
-    }, [])
+
 
      if (isLoading) {
             return <CircularProgress/>;
     }
 
     return(
-        <Container className='pageContentWrapper'>
+        <Container className='pageContentWrapper' maxWidth={false}>
             <CalenderMonth date={helperDate} getNextMonth={getNextMonth} getPreviousMonth={getPreviousMonth} />
             <OverViewInfo currentDate={helperDate} />
         </Container>

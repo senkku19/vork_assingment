@@ -39,6 +39,10 @@ const OverViewInfo = ({ currentDate }) => {
         setFilteredCards(filterCards);
     }
 
+    useEffect(() => {
+        filterTimeCards();
+    }, [currentDate, timeCards])
+
     const getMonthSummary = () => {
         const summary = {
             workDays: 0,
@@ -56,8 +60,12 @@ const OverViewInfo = ({ currentDate }) => {
             let hours = minutes/60
             summary.workTime += parseFloat(hours.toFixed(2));
 
-            summary.overTime += parseFloat(val.overTime.replace(/,/, '.'))
-            summary.travellingTime += parseFloat(val.travellingTime.replace(/,/, '.'))
+            let overTime = parseFloat(val.overTime.replace(',', '.'));
+            let travellingTime = parseFloat(val.travellingTime.replace(',', '.'));
+
+            summary.overTime = parseFloat((summary.overTime + overTime).toFixed(2));
+            summary.travellingTime = parseFloat((summary.travellingTime + travellingTime).toFixed(2));
+
 
             if(!summary[val.compensation]) 
                 summary[val.compensation] = 1;
@@ -83,10 +91,6 @@ const OverViewInfo = ({ currentDate }) => {
     }
 
     useEffect(() => {
-        filterTimeCards();
-    }, [currentDate, timeCards])
-
-    useEffect(() => {
         getMonthSummary();
     }, [filteredCards]);
 
@@ -99,7 +103,7 @@ const OverViewInfo = ({ currentDate }) => {
                 gap: '5px'
             }}
         >
-            <Typography variant='h4' > Kuukauden yhteenveto: </Typography>
+            <Typography variant='h4' >Kuukauden yhteenveto: </Typography>
 
                 <Box 
                     sx={columnStyleBox}

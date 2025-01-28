@@ -35,17 +35,20 @@ const WorkTimeCard = () => {
     }
 
     const handleBreakEnd = () => {
+        if (timeCard.breakStart) {
+            const time = new Date();
+            const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
+            updateTimeCard(timeCard.id, { breakEnd: end });
+        }
+
         startTimer();
-        const time = new Date();
-        const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
-        updateTimeCard(timeCard.id, { breakEnd: end });
     }
 
     return (
         <Card className = 'timeCardBase'>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                 <AccessTimeRoundedIcon sx={{color: BaseWorkStyles.colors.primary.activate}}/>
-                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', gap:'5px' }}>
                     <Typography variant='body2' sx={{color: BaseWorkStyles.colors.secondary.dark}}>Työaika</Typography>
                     <Timer/>
                 </Box>

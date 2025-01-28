@@ -34,7 +34,7 @@ const NavigationBar = () => {
 
 
     return(
-        <Container component={'nav'} className="navigation">
+        <Container component={'nav'} maxWidth={false} className="navigation">
             <NavigationItem to={"/kellokortti"} icon={isTimeCardActive()} label="Kellokortti"/>
         </Container>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Typography, Box, TextField, InputAdornment, MenuItem, Button } from "@mui/material";
+import { Typography, Box, TextField, InputAdornment, MenuItem, Button, CircularProgress } from "@mui/material";
 import { format, parse, parseISO } from "date-fns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
@@ -15,7 +15,9 @@ import BaseWorkStyles from "../../styles/BaseWorkStyles";
 import { useNavigate } from "react-router-dom";
 
 const SummaryForm = () => {
-    const timeCard = useTimeCardStore((state) => state.timeCard);
+    const timeCard = useTimeCardStore(state => state.timeCard);
+    const emptyTimeCard = useTimeCardStore(state => state.emptyTimeCard);
+    const isLoading = useTimeCardStore(state => state.isLoading);
     const { 
         control,
         watch,
@@ -23,7 +25,8 @@ const SummaryForm = () => {
         handleSubmit,
         formState: { errors },
      } = useForm({
-        defaultValues: {
+        defaultValues: timeCard
+        ? {
             date: parseISO(timeCard.date),
             startTime: parse(timeCard.startTime, "HH:mm", new Date()),
             endTime: parse(timeCard.endTime, "HH:mm", new Date()),
@@ -36,7 +39,7 @@ const SummaryForm = () => {
             overTime: timeCard.overTime || 0,
             travellingTime: timeCard.travellingTime || 0,
             compensation: "", 
-        }
+        } : {},
     })
 
     const watchStartTime = watch('startTime')
@@ -63,7 +66,7 @@ const SummaryForm = () => {
     }
 
     const validateWorkTime = ( startTime, endTime ) => {
-        if (startTime >= endTime ) {
+        if (startTime >= endTime) {
             setError("endTime", {
                 type: "manual",
                 message: "Työpäivän täytyy päättyä aloitusajan jälkeen."
@@ -76,35 +79,32 @@ const SummaryForm = () => {
 
     const validateBreakTime = ( breakStart, breakEnd, startTime, endTime ) => {
 
-        if (breakStart && !breakEnd) {
-            setError("breakEnd", {
-                type: "manual",
-                message: "Tauolla pitää olla aloitus ja lopetus."
-            }) 
-            return false;
-        } else if (!breakStart && breakEnd) {
+        let isValid = true;
+
+    
+        if ((breakStart <= startTime) || (endTime <= breakStart)) {
             setError("breakStart", {
                 type: "manual",
-                message: "Tauolla pitää olla aloitus ja lopetus."
+                message: "Tauon täytyy sijoittua työajalle."
             }) 
-            return false;
-        } else if (breakStart && breakEnd) {
-            if ((breakStart < startTime) || (endTime < breakStart)) {
-                setError("breakStart", {
-                    type: "manual",
-                    message: "Tauon pitää sijoittua työajalle."
-                }) 
-                return false;
-            } else if ((breakEnd > endTime) || (breakStart >= breakEnd) ) {
-                setError("breakEnd", {
-                    type: "manual",
-                    message: "Tauko täytyy sijottua työajalla ja oikeassa järjestyksessä."
-                }) 
-                return false;
-            }
+            isValid = false;
+        }
+             
+        if ((breakEnd >= endTime) || (breakEnd <= startTime) ) {
+            setError("breakEnd", {
+                type: "manual",
+                message: "Tauon täytyy sijottua työajalla"
+            }) 
+            isValid = false;
+        } else if (breakStart >= breakEnd) {
+            setError("breakEnd", {
+                type: "manual",
+                message: "Tauko ei voi päättyä ennen sen alkua"
+            }) 
+            isValid = false;
         }
 
-        return true;
+        return isValid;
 
     }
 
@@ -112,9 +112,25 @@ const SummaryForm = () => {
     const validateForm = (data) => {
         let isValid = true;
 
-       isValid = validateWorkTime(data.startTime, data.endTime);
+       isValid = validateWorkTime(data.startTime.getTime(), data.endTime.getTime());
 
-       isValid = validateBreakTime(data.breakStart, data.breakEnd, data.startTime, data.endTime);
+       if (data.breakStart && !data.breakEnd) {
+            setError("breakEnd", {
+                type: "manual",
+                message: "Tauolla pitää olla aloitus ja lopetus."
+            }) 
+            isValid = false;
+        } else if (!data.breakStart && data.breakEnd) {
+            setError("breakStart", {
+                type: "manual",
+                message: "Tauolla pitää olla aloitus ja lopetus."
+            }) 
+            isValid = false;
+        } else if (data.breakStart && data.breakEnd) {
+
+            isValid = validateBreakTime(data.breakStart.getTime(), data.breakEnd.getTime(), data.startTime.getTime(), data.endTime.getTime());
+        
+        }
 
 
         if (!data.compensation) {
@@ -144,10 +160,10 @@ const SummaryForm = () => {
           return isValid;
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         if (!validateForm(data)) return;
 
-        acceptTimeCard(timeCard.id, {
+        await acceptTimeCard(timeCard.id, {
             ...timeCard,
             ...data,
             date: format(data.date, 'yyyy-MM-dd'),
@@ -161,8 +177,14 @@ const SummaryForm = () => {
 
         setLoggedIn(false);
         stopTimer();
-        navigate("/kellokortti");
+        
+        navigate("/kellokortti/koonti");
+        emptyTimeCard();
     };
+
+    if (isLoading || timeCard === null) {
+        return <CircularProgress/>;
+    }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -334,8 +356,14 @@ const SummaryForm = () => {
                     render={({ field }) =>
                         <TextField
                             {...field}
+                            InputProps={{
+                                id: 'compensation-select',
+                            }}
                             label="Korvaustapa"
-                            id="select"
+                            InputLabelProps={{
+                                id: 'compensation-select-label',
+                                htmlFor: 'compensation-select'
+                            }}
                             select
                             error={!!errors.compensation}
                             helperText={errors?.compensation?.message }

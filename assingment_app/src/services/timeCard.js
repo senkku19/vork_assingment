@@ -1,9 +1,9 @@
 import { axiosInstance } from "./axios"
 
 const getAll = () => {
-    const request = axiosInstance.get('/timeCards')
-    return request.then(response => response.data)
-}
+    return axiosInstance.get('/timeCards').then(response => response.data);
+};
+
 
 const create = async (newTimeCard) => {
     const response = await axiosInstance.post('/timeCards', newTimeCard)

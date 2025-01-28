@@ -68,6 +68,7 @@ const VorkTheme = createTheme({
                         justifyContent: 'space-around',
                         padding: '16px 10px',
                         position: 'relative',
+                        width: '100%',
                         backgroundColor: 'white',
                         }
                 },
@@ -92,6 +93,7 @@ const VorkTheme = createTheme({
                         flex: 1,
                         gap: '15px',
                         height: '100%',
+                        width: '100%',
                         borderTopLeftRadius: '20px',
                         borderTopRightRadius: '20px',
                         overflowY: 'scroll',

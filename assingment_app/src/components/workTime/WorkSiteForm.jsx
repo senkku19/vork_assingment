@@ -9,7 +9,9 @@ import BaseWorkStyles from "../../styles/BaseWorkStyles";
 const WorkSiteForm = ({ open, handleClose }) => {
     const {
         control,
-        handleSubmit
+        handleSubmit,
+        formState: { errors },
+        reset
     } = useForm({
         defaultValues: {
         workSite: ''
@@ -40,6 +42,11 @@ const WorkSiteForm = ({ open, handleClose }) => {
         handleClose();
     }
 
+    const handleFormClose = () => {
+        reset();
+        handleClose();
+    };
+
     return (
         <Dialog
             open={open}
@@ -59,15 +66,26 @@ const WorkSiteForm = ({ open, handleClose }) => {
                 <Controller 
                     name="workSite"
                     control={ control }
+                    rules={{
+                        required: "Valitse työmaa"
+                    }}
                     render={({ field }) =>
                         <TextField
                             {...field}
+                            InputProps={{
+                                id: 'worksite-select',
+                            }}
                             label="Työmaa"
-                            id="select"
+                            InputLabelProps={{
+                                id: 'worksite-select-label',
+                                htmlFor: 'worksite-select'
+                            }}
                             select
                             sx={{
                                 width: '100%',
                             }}
+                            error={!!errors.workSite}
+                            helperText={errors.workSite ? errors.workSite.message : ""}
                         >
                             {workSites.map((workSite) => 
                                 <MenuItem key={workSite.id} value={workSite.id}>{workSite.title}</MenuItem>
@@ -77,7 +95,7 @@ const WorkSiteForm = ({ open, handleClose }) => {
                 />
             </DialogContent>
             <DialogActions className="formButtons">
-                <Button className='stopButton' onClick={handleClose}>Peruuta</Button>
+                <Button className='stopButton' onClick={handleFormClose}>Peruuta</Button>
                 <Button className='activateButton' type="submit">Kirjaudu</Button>
             </DialogActions>
         </Dialog>

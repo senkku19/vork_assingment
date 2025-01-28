@@ -19,7 +19,7 @@ const WorkTime = () => {
     }
 
     return (
-        <Container className="pageContentWrapper">
+        <Container maxWidth={false} className="pageContentWrapper">
             <WorkSiteForm open={open} handleClose={handleClose}/>
             <CalenderWeek/>
             <TimeCard handleOpen={handleOpen}/>

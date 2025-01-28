@@ -24,7 +24,7 @@ const Kellokortti = () => {
     }, [isRunning]);
 
     return(
-        <Container className="pageWrapper">
+        <Container maxWidth={false} className="pageWrapper">
             <Box sx= {{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                 <Typography variant="h4" sx={{color: 'white', padding: '20px'}}>Kellokortti</Typography>
                 { timecard &&

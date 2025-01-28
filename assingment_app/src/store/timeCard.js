@@ -10,7 +10,10 @@ const useTimeCardStore = create(
         isLoading: false,
         setLoading: (isLoading) => {
             set({isLoading});
-         },
+        },
+        emptyTimeCard: () => {
+            set({ timeCard: null });
+        },
         createTimeCard: async (timeCard) => {
             try {
                 get().setLoading(true);
@@ -34,7 +37,6 @@ const useTimeCardStore = create(
                 get().setLoading(true);
                 await TimeCardService.create(updatedFields);
                 await RunningTimeCardService.deleteTimeCard(id);
-                set({ timeCard: null })
             } finally {
                 get().setLoading(false);
             }

@@ -3,9 +3,9 @@ import NestedNavigationItem from "./NestedNavigationItem";
 
 const NestedNavigationBar = () => {
     return(
-        <Container disableGutters component={'nav'} className="nestedNavigation">
+        <Container disableGutters component={'nav'} maxWidth={false} className="nestedNavigation">
             <NestedNavigationItem to='/kellokortti/tyoaika' label='Työaika'/>
-            <NestedNavigationItem to='*' label='Projektitunnit'/>
+          
             <NestedNavigationItem to='/kellokortti/koonti' label='Koonti'/>
         </Container>
     )

@@ -12,7 +12,7 @@ const DaySummery = () => {
     }
 
     return (
-        <Container className="pageWrapper">
+        <Container maxWidth={false} className="pageWrapper">
             <Typography variant="h4" sx={{color: 'white', padding: '20px'}}>Yhteenveto työpäivästäsi</Typography>
             <Container className="pageContentWrapper">
                <SummaryForm/> 
