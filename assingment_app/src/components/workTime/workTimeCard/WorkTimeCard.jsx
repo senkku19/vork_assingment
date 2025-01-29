@@ -15,6 +15,8 @@ const WorkTimeCard = () => {
     const isRunning = useTimerStore(state => state.isRunning);
     const pauseTimer = useTimerStore(state => state.pauseTimer);
     const startTimer = useTimerStore(state => state.startTimer);
+    const isBreakRunning = useTimerStore(state => state.isBreakRunning);
+    const setIsBreakRunning = useTimerStore(state => state.setIsBreakRunning);
     const timeCard = useTimeCardStore(state => state.timeCard);
     const updateTimeCard = useTimeCardStore(state => state.updateTimeCard);
     const navigate = useNavigate();
@@ -31,14 +33,16 @@ const WorkTimeCard = () => {
         pauseTimer();
         const time = new Date();
         const start = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
-        updateTimeCard(timeCard.id, { breakStart: start })
+        updateTimeCard(timeCard.id, { breakStart: start });
+        setIsBreakRunning(true);
     }
 
     const handleBreakEnd = () => {
-        if (timeCard.breakStart) {
+        if (isBreakRunning) {
             const time = new Date();
             const end = time.getHours() + ':' + time.getMinutes().toString().padStart(2, '0');
             updateTimeCard(timeCard.id, { breakEnd: end });
+            setIsBreakRunning(false);
         }
 
         startTimer();

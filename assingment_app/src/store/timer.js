@@ -4,6 +4,7 @@ import { devtools } from 'zustand/middleware';
 const useTimerStore = create(
     devtools((set, get) => ({
         isRunning: false,
+        isBreakRunning: false,
         timer: 0,
         hours: 0,
         minutes: 0,
@@ -19,6 +20,9 @@ const useTimerStore = create(
                 hours: Math.floor(get().timer/3600),
                 minutes: Math.floor( (get().timer % 3600) / 60)
             })
+        },
+        setIsBreakRunning: (isBreakRunning) => {
+            set({ isBreakRunning: isBreakRunning })
         },
         stopTimer: () => {
             set({ 

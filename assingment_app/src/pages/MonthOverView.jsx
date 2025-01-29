@@ -34,7 +34,11 @@ const MonthOverView = () => {
 
 
      if (isLoading) {
-            return <CircularProgress/>;
+            return (
+                <Container className='pageContentWrapper' maxWidth={false} sx= {{ alignItems: 'center' }}>
+                      <CircularProgress/>
+                </Container>
+            );
     }
 
     return(
