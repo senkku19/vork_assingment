@@ -10,19 +10,47 @@
 ## Käyttöönotto
 
 Projektin juureen on luotu kaksi eri kansiota: assingmen_app ja assingment_backend. Toinen kansio sisältää sovelluksen backendin ja toinen frontendin. Jotta sovellus ja sen kaikki ominaisuudet toimisivat odotetusti, on tärkeää, että molemmat kansiot ns. juoksevat samanaikaisesti.
-Tämä onnistuu avaaamalla kummallekin sovelluksen osalle oma terminaali.  
+Tämä onnistuu avaaamalla kummallekin sovelluksen osalle oma terminaali. 
+
+Ensin kopio repositorio tietokoneellesi ja avaa repositorion juuri haluamallasi tekstieditorilla.
 
 ### Frontendin ajaminen
-```node
+
+1. Avaa frontendille oma terminaali-ikkuna ja siirry sen frontend-kansioon.
+   
+```bash
 cd assingment_app
+```
+
+2. Asenna tarvittavat riippuvuudet
+
+```node
 npm install
+```
+
+3. Käynnista sovelluksen frontend
+
+```node
 npm run dev
 ```
 
 ### Backendin ajaminen
-```node
+
+1. Avaa backendille uusi terminaali-ikkuna ja siirry backend-kansioon.
+   
+```bash
 cd assingment_backend
+```
+
+2. Asenna tarvittavat riippuvuudet
+
+```node
 npm install
+```
+
+3. Käynnista sovelluksen backend
+
+```node
 npm run dev
 ```
 
