@@ -33,13 +33,13 @@ täytyy tehdä koodiin hieman muutoksia.
 
 #### 1 askel
 
-Varmista, että puhelimesi ja tietokoneesi käyttävät samaa netti yhetyttä. 
+Varmista, että puhelimesi ja tietokoneesi käyttävät samaa nettiyhetyttä. 
 
 #### 2 askel
 
 Navigoi projektissa tiedostoon [axios.js](https://github.com/senkku19/vork_assingment/blob/main/assingment_app/src/services/axios.js). Tiedosto löytyy polulta ./assingment_app/src/services/axios.js.
 
-Kommentoi rivi 4 pois ja poista kommenti merkinnät riviltä 5. Korvaa {ip} omalla ip osoitteellasi. 
+Kommentoi rivi 4 pois ja poista kommentti merkinnät riviltä 5. Korvaa {ip} omalla ip osoitteellasi. 
 
 **Esimerkki**
 
@@ -63,7 +63,7 @@ Nyt voit käyttää sovellusta puhelimellasi osoitteessa:  http://esimerkkiIP:51
 
 ## Lyhyt kuvaus
 
-Sovellus on yksinkertainen kellokortti sovellus. Käyttäjä voi sovelluksen avulla käynnistää ja lopettaa kellokortin (eli työpäivän), kirjautua työmaalle ja poistua sieltä, 
+Sovellus on yksinkertainen kellokorttisovellus. Käyttäjä voi sovelluksen avulla käynnistää ja lopettaa kellokortin (eli työpäivän), kirjautua työmaalle ja poistua sieltä, 
 tauottaa kellokortin ja tarkastella kuukauden työpäivien yhteenvetoa. 
 
 Käydään vielä lyhyesti sovelluksen eri näkymien toiminnallisuudet. 
@@ -73,14 +73,14 @@ Käydään vielä lyhyesti sovelluksen eri näkymien toiminnallisuudet.
 Sivulla löytyy ensinnäkin kalenteri, joka ilmoitta käyttäjälle, mikä päivä, viikko ja kuukausi on kyseessä. Kalenteri toimii ja sitä voi selata edestakaisin. Päivämäärää ei voi kuitenkaan muuttaa. 
 
 Tällä sivulla käyttäjä voi aloittaa työpäivän, jolloin sovellus luo uuden ns. juoksevan kellokortin. Näkymään ilmestyy toinen kortti, jossa käyttäjälle kerrotaan
-kuinka paljon aikaa on kulunut työpäivän aloituksesta. Ns. työkortissa on myös kaksi toiminnallisuutta: käyttäjä voi tautottaa sitä tai päättää työpäivän. Luonnollisesti 
-tauotus pysäyttää työajan, kunnes käyttäjää "jatkaa" työpäivää. Työpäivän päättämis-toiminnallisuus avaa käyttäjälle yhteenveto sivun, jossa käyttäjä voi tarkastella ja muokata työpäivän tietoja, ennen työpäivän hyväksymistä.
+kuinka paljon aikaa on kulunut työpäivän aloituksesta. Työkortissa on myös kaksi toiminnallisuutta: käyttäjä voi tauottaa sitä tai päättää työpäivän. Luonnollisesti 
+tauotus pysäyttää työajan, kunnes käyttäjää "jatkaa" työpäivää. Työpäivän päättämis-toiminnallisuus avaa käyttäjälle yhteenvetosivun, jossa käyttäjä voi tarkastella ja muokata työpäivän tietoja, ennen työpäivän hyväksymistä.
 
 Sivulla käyttäjä voi myös kirjautua työmaalle. Ominaisuus on pelkistetty versio siitä, mitä se voisi olla. Kirjaudu työmaalle - painike avaa komponentin, jossa käyttäjä voi valita aktiivisten työmaiden listata juuri sen, millä hän työskentelee sinä päivänä. Ominaiuus sitten merkkaa kellokortiin työmaan, jonka käyttäjä valitsi. 
 
 ### Kellokortti/yhteenveto
 
-Yhteenveto sivulla on kuukausi kalenteri, jonka avulla käyttäjä voi valita, minkä kuukauden yhteenvetoa hän haluaa tarkastella. 
+Yhteenvetosivulla on kuukausi kalenteri, jonka avulla käyttäjä voi valita, minkä kuukauden yhteenvetoa hän haluaa tarkastella. 
 
 Kuukauden valittuaan käyttäjä voi mm. tarkastella kuinka paljon hän on työskennellyt yhteensä tai kuinka monta päivää 
 hän on ollut sairaana. 
