@@ -70,15 +70,13 @@ Käydään vielä lyhyesti sovelluksen eri näkymien toiminnallisuudet.
 
 ### Kellokortti/tyoaika
 
-Sivulla löytyy ensinnäkin kalenteri, joka ilmoitta käyttäjälle, mikä päivä, viikko ja kuukausi on kyseessä. Kalenteri toimii ja sitä voi selata eteenpäin ja taaksepäin. Päivämäärä ei voi
-kuitenkaan vaihtaa. 
+Sivulla löytyy ensinnäkin kalenteri, joka ilmoitta käyttäjälle, mikä päivä, viikko ja kuukausi on kyseessä. Kalenteri toimii ja sitä voi selata edestakaisin. Päivämäärää ei voi kuitenkaan muuttaa. 
 
 Tällä sivulla käyttäjä voi aloittaa työpäivän, jolloin sovellus luo uuden ns. juoksevan kellokortin. Näkymään ilmestyy toinen kortti, jossa käyttäjälle kerrotaan
 kuinka paljon aikaa on kulunut työpäivän aloituksesta. Ns. työkortissa on myös kaksi toiminnallisuutta: käyttäjä voi tautottaa sitä tai päättää työpäivän. Luonnollisesti 
-tauotus pysäyttää työajan, kunnes käyttäjää "jatkaa" työpäivää. Työpäivän päättämis - toiminnallisuus avaa käyttäjälle yhteenveto sivun, jossa käyttäjä voi tarkastella ja muokata työpäivän tietoja, ennen työpäivän hyväksymistä.
+tauotus pysäyttää työajan, kunnes käyttäjää "jatkaa" työpäivää. Työpäivän päättämis-toiminnallisuus avaa käyttäjälle yhteenveto sivun, jossa käyttäjä voi tarkastella ja muokata työpäivän tietoja, ennen työpäivän hyväksymistä.
 
-Sivulla käyttäjä voi myös kirjautua työmaalle. Ominaisuus on pelkistetty versio siitä, mitä se voisi olla. Kirjaudu työmaalle - painike avaa komponentin, jossa käyttäjä voi valita
-aktiivisten työmaiden listata juuri sen, millä hän työskentelee sinä päivänä. Ominaiuus sitten merkkaa kellokortiin työmaan, jonka käyttäjä valitsi. 
+Sivulla käyttäjä voi myös kirjautua työmaalle. Ominaisuus on pelkistetty versio siitä, mitä se voisi olla. Kirjaudu työmaalle - painike avaa komponentin, jossa käyttäjä voi valita aktiivisten työmaiden listata juuri sen, millä hän työskentelee sinä päivänä. Ominaiuus sitten merkkaa kellokortiin työmaan, jonka käyttäjä valitsi. 
 
 ### Kellokortti/yhteenveto
 
@@ -129,8 +127,8 @@ joista olen ylpeä. Vaikka olen erityisen ylpeä mm. sovelluksen ulkokuoresta, e
 liian helpolta vastaukselta.
 
 Jos kuitenkin pitää valita vain yksi asia, jossa koen erityisesti onnistuneeni, se on niinkin yksinkertainen ominaisuus kuin työpäivän ajastin. 
-Mielestäni onnistuin luomaan ratkaisun, joka on logiikaltaan kevut ja käyttäjäystävällinen. 
-Pidän erityisesti sitä, että ajastin näkyy kellokortti-sivun oikeassa yläkulmassa, vaikka käyttäjä olisi tarkastelemassa yhteenvetosivua.
+Mielestäni onnistuin luomaan ratkaisun, joka on logiikaltaan kevyt ja käyttäjäystävällinen. 
+Pidän erityisesti siitä, että ajastin näkyy kellokortti-sivun oikeassa yläkulmassa, vaikka käyttäjä olisi tarkastelemassa yhteenvetosivua.
 
 Lisäksi pidän siitä, kuinka ajastimen tila näkyy selkeästi: kun ajastin on käynnissä, navigaatiomenun kellokortti-napissa ja kellokortti-sivun 
 ylälaidassa on vihreä ympyrä, joka symboloi ajastimen aktiivisuutta. Kun taas ajastin on tauotettu, ympyrä muuttuu punaiseksi.
